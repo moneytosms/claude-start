@@ -67,7 +67,7 @@ Commit `.claude/` — your teammates get the same hooks, agents, and commands au
 **macOS / Linux / WSL:**
 
 ```bash
-git clone https://github.com/<you>/claude-template my-project
+git clone https://github.com/moneytosms/claude-template my-project
 cd my-project
 chmod +x install.sh && ./install.sh
 ```
@@ -75,7 +75,7 @@ chmod +x install.sh && ./install.sh
 **Windows:**
 
 ```powershell
-git clone https://github.com/<you>/claude-template my-project
+git clone https://github.com/moneytosms/claude-template my-project
 cd my-project
 .\install.ps1
 ```

@@ -66,7 +66,7 @@ rtk init -g
 chmod +x .claude/hooks/*.sh
 ```
 
-On Windows, hooks run via WSL or Git Bash. If you're on native Windows and hooks don't fire, open WSL, navigate to the project, and run the command above.
+On Windows, hooks run via WSL. The hook commands in `settings.json` use `wslpath` to convert Windows paths to WSL paths automatically — no manual setup needed beyond having WSL installed.
 
 ---
 

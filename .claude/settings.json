@@ -32,7 +32,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/session-start.sh"]
+            "args": ["-c", "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}')/.claude/hooks/session-start.sh\""]
           }
         ]
       }
@@ -44,7 +44,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/notify.sh"],
+            "args": ["-c", "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}')/.claude/hooks/notify.sh\""],
             "async": true
           }
         ]
@@ -57,12 +57,12 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/log-bash.sh"]
+            "args": ["-c", "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}')/.claude/hooks/log-bash.sh\""]
           },
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/pre-deploy-guard.sh"],
+            "args": ["-c", "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}')/.claude/hooks/pre-deploy-guard.sh\""],
             "timeout": 300000
           }
         ]
@@ -75,7 +75,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/auto-format.sh"],
+            "args": ["-c", "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}')/.claude/hooks/auto-format.sh\""],
             "async": true
           }
         ]
@@ -87,7 +87,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/keep-going.sh"]
+            "args": ["-c", "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}')/.claude/hooks/keep-going.sh\""]
           }
         ]
       }

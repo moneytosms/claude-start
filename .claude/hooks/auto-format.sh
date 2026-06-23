@@ -27,6 +27,7 @@ FILE_PATH="${FILE_PATH:-}"
 [[ ! -f "$FILE_PATH" ]]  && exit 0
 
 # Run formatter; suppress errors so they never surface to Claude
-eval "$PROJECT_FMT \"$FILE_PATH\"" 2>/dev/null || true
+# Use printf to safely construct the command without eval quoting pitfalls
+eval "$PROJECT_FMT $(printf '%q' "$FILE_PATH")" 2>/dev/null || true
 
 exit 0

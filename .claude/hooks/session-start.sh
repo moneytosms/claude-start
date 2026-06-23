@@ -62,3 +62,5 @@ if branch and branch not in ("main", "master", "") and source in ("startup", "re
 
 print(json.dumps(out))
 PYEOF
+
+exit 0

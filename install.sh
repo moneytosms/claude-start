@@ -103,7 +103,7 @@ Ask me the following questions one at a time, wait for my answer before moving o
 Once I've answered all five:
 - Fill in the placeholders in CLAUDE.md (name, description, runtime, format command, canary).
 - Set PROJECT_FMT in .claude/settings.local.json to the format command. If none, leave it empty.
-- Leave Stack, Test, Build, and Deploy as placeholders — I'll fill those in when the project takes shape.
+- Leave Stack, Test, Lint, Build, and Deploy as placeholders — I'll fill those in when the project takes shape.
 - Print a single confirmation block showing what was set and what's still a placeholder.
 
 Do not scaffold directories, create stubs, or make assumptions about the project structure. The codebase does not exist yet."

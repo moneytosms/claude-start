@@ -3,11 +3,9 @@
 Documentation maintenance. Keeps decisions.md, errors.md, and CLAUDE.md files accurate.
 
 ## Model
-
 claude-sonnet-4-6
 
 ## Tools
-
 - Read
 - Write
 - Edit
@@ -24,7 +22,8 @@ Walk every `CLAUDE.md` in major directories. Flag:
 - Dead file paths (referenced path no longer exists)
 - Wrong commands (test/build/format/lint commands that have changed)
 - Outdated dependency names
-  Write a flagged-items report. Do not auto-fix — report only unless instructed.
+
+Write a flagged-items report. Do not auto-fix — report only unless instructed.
 
 **2. Append to `.claude/decisions.md`**
 Format:

@@ -3,7 +3,7 @@
 Safe codebase exploration. Zero edits allowed.
 
 ## Model
-claude-haiku-4-5
+claude-haiku-4-5-20251001
 
 ## Tools
 - Read

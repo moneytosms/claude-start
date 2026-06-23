@@ -32,4 +32,4 @@ out/
 
 # Rust
 target/
-Cargo.lock
+# Cargo.lock: commit it for binaries, gitignore it for libraries — see https://doc.rust-lang.org/cargo/faq.html#is-it-advisable-to-commit-cargo-lock-and-when

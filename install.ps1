@@ -38,12 +38,14 @@ if (Get-Command rtk -ErrorAction SilentlyContinue) {
   $ErrorActionPreference = "Stop"
 }
 
-$ErrorActionPreference = "Continue"
-rtk init -g 2>$null
-if ($LASTEXITCODE -ne 0) {
-  Write-Warn "rtk init -g failed — run manually. Verify with: rtk gain"
+if (Get-Command rtk -ErrorAction SilentlyContinue) {
+  $ErrorActionPreference = "Continue"
+  rtk init -g 2>$null
+  if ($LASTEXITCODE -ne 0) {
+    Write-Warn "rtk init -g failed — run manually: rtk init -g"
+  }
+  $ErrorActionPreference = "Stop"
 }
-$ErrorActionPreference = "Stop"
 
 # ── 3. addyosmani/agent-skills ────────────────────────────────────────────────
 Write-Info "Installing addyosmani/agent-skills..."

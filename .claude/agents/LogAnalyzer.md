@@ -3,7 +3,7 @@
 Parse crash logs, build errors, and traces. Surface root cause.
 
 ## Model
-claude-haiku-4-5
+claude-haiku-4-5-20251001
 
 ## Tools
 - Read

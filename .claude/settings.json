@@ -7,6 +7,15 @@
       "Bash(git status)",
       "Bash(git log *)",
       "Bash(git diff *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git branch *)",
+      "Bash(git checkout *)",
+      "Bash(git fetch *)",
+      "Bash(git stash *)",
+      "Bash(git merge *)",
+      "Bash(npm run *)",
       "Bash(npx ctx7 *)"
     ],
     "deny": [
@@ -54,14 +63,14 @@
             "type": "command",
             "command": "bash",
             "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/pre-deploy-guard.sh"],
-            "timeout": 300
+            "timeout": 300000
           }
         ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": "Edit|Write",
+        "matcher": "Edit|Write|NotebookEdit",
         "hooks": [
           {
             "type": "command",

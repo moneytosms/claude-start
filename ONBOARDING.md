@@ -86,6 +86,8 @@ On Windows, hooks run via WSL or Git Bash. If you're on native Windows and hooks
 ├── decisions.md           ← Architecture decision log — DocWriter maintains
 ├── bash.log               ← Audit trail of every bash command Claude ran (gitignored)
 └── checkpoint.md          ← Mid-session state — Claude writes, next session reads
+
+CLAUDE.local.md            ← Yours only. Gitignored. Personal notes, local context, machine-specific overrides Claude should know.
 ```
 
 **You will interact with:**

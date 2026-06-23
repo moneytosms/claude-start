@@ -15,7 +15,6 @@ Stage all changes, generate a concise commit message, commit, and push.
 5. Commit: `git commit -m "<message>"`
 6. Push: `git push`
    - If the branch has no upstream yet: `git push -u origin HEAD`
-   - If using a fork: `gh repo sync` instead
 
 ## Rules
 

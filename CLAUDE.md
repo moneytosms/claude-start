@@ -41,12 +41,12 @@ Can't produce it = context dropped. Stop and say so.
 
 ## Agents
 
-Ask before spawning. Defined in `.claude/agents/`.
+Ask before spawning and spawn using appropriate model according to the task. Defined in `.claude/agents/`.
 `ReadOnly` · `BuildValidator` · `LogAnalyzer` · `Researcher` · `CodeReviewer` · `DocWriter`
 
 ## Folder map
 
-Each major dir has a `CLAUDE.md`. Read it first.
+Append the reference to each major folder here and what it containts. Each major dir has a `CLAUDE.md`. Follow the route to find the sections you need.
 
 <!-- src/ — app logic | infra/ — do not edit generated files -->
 

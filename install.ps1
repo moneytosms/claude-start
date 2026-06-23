@@ -95,13 +95,21 @@ Write-Info "All done. Handing off to Claude..."
 Write-Info ""
 
 $prompt = @"
-Read CLAUDE.md and .claude/settings.json. Then:
-1. Ask me: project name, one-sentence description, stack (language, framework, key deps), test command, format command, build command, deploy command, and a canary codename.
-2. Fill in all placeholders in CLAUDE.md with my answers.
-3. Update .claude/settings.local.json: set PROJECT_FMT to my format command.
-4. Update .claude/settings.json env.PROJECT_FMT to the same formatter.
-5. Create .claude/rules/ files for any major dirs (src/, infra/, etc).
-6. Write a CLAUDE.md stub in each major dir.
-7. Confirm what was set up and what still needs manual input.
+Bootstrap complete. The template is ready but nothing about your project is configured yet.
+
+Ask me the following questions one at a time, wait for my answer before moving on:
+1. What is the project name?
+2. One sentence: what does it do?
+3. What is your primary language and runtime? (e.g. TypeScript / Node 22)
+4. What formatter should run on every file save? (e.g. prettier --write, ruff format -- or 'none')
+5. What is your canary codename? (short, memorable word used at the end of every completed task)
+
+Once I've answered all five:
+- Fill in the placeholders in CLAUDE.md (name, description, runtime, format command, canary).
+- Set PROJECT_FMT in .claude/settings.local.json and env.PROJECT_FMT in .claude/settings.json to the format command. If none, leave them empty.
+- Leave Stack, Test, Build, and Deploy as placeholders -- I'll fill those in when the project takes shape.
+- Print a single confirmation block showing what was set and what's still a placeholder.
+
+Do not scaffold directories, create stubs, or make assumptions about the project structure. The codebase does not exist yet.
 "@
 claude $prompt

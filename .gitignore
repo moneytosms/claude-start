@@ -1,6 +1,9 @@
-# Claude local settings (machine-specific, never commit)
-# Template is at .claude/settings.local.json.example
+# Claude — machine-specific, never commit
+# Template at .claude/settings.local.json.example
 .claude/settings.local.json
+
+# Personal project preferences (create manually alongside CLAUDE.md)
+CLAUDE.local.md
 
 # Bash audit log (append-only, machine-specific)
 .claude/bash.log

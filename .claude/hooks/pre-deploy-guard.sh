@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 # pre-deploy-guard.sh — PreToolUse hook (Bash matcher)
-# Intercepts deploy commands and runs the test suite before allowing them.
-# Exit 2 → blocks the tool call (Claude sees stderr as the reason).
+# Intercepts deploy commands and runs lint then tests before allowing them through.
+# Exit 2 → blocks the tool call; Claude sees stderr as the reason.
 # Exit 0 → passes through.
 #
 # stdin JSON: { "tool_name": "Bash", "tool_input": { "command": "..." }, ... }
-# Add project-specific deploy patterns to DEPLOY_PATTERNS.
+#
+# Configure:
+#   DEPLOY_PATTERNS — add patterns for your deploy commands
+#   CLAUDE.md **Lint:** — lint command (optional; tests-only gate if absent)
+#   CLAUDE.md **Test:** — test command (required for gate to activate)
 
 set -uo pipefail
 
@@ -51,29 +55,62 @@ for pattern in "${DEPLOY_PATTERNS[@]}"; do
 done
 [[ "$IS_DEPLOY" == "false" ]] && exit 0
 
-# --- Deploy detected ---
-echo "pre-deploy-guard: deploy command intercepted: $CMD" >&2
-echo "" >&2
+# ── Deploy detected ──────────────────────────────────────────────────────────
+echo "pre-deploy-guard: intercepted deploy: $CMD" >&2
 
-# Parse test command from CLAUDE.md (line after **Test:**)
-TEST_CMD=$(awk '/^\*\*Test:\*\*/{found=1; next} found{print; exit}' "$CLAUDE_MD" 2>/dev/null \
-  | sed 's/^[[:space:]]*-[[:space:]]*//' | sed 's/`//g' | xargs 2>/dev/null)
+# Helper: parse a command field from CLAUDE.md
+# Usage: parse_cmd "**Test:**"
+parse_cmd() {
+  local field="$1"
+  local escaped
+  escaped=$(printf '%s' "$field" | sed 's/[[\.*^$()+?{}|]/\\&/g')
+  awk "/^${escaped}/{found=1; next} found{print; exit}" "$CLAUDE_MD" 2>/dev/null \
+    | sed 's/^[[:space:]]*-[[:space:]]*//' | sed 's/`//g' | xargs 2>/dev/null
+}
 
-if [[ -z "$TEST_CMD" ]] || echo "$TEST_CMD" | grep -q "e\.g\."; then
-  echo "pre-deploy-guard: no test command in CLAUDE.md — skipping gate." >&2
-  echo "Set '**Test:**' in CLAUDE.md to enable pre-deploy protection." >&2
-  exit 0
-fi
+LINT_CMD=$(parse_cmd "**Lint:**")
+TEST_CMD=$(parse_cmd "**Test:**")
 
-echo "Running: $TEST_CMD" >&2
-cd "$CLAUDE_PROJECT_DIR" && eval "$TEST_CMD"
-EXIT_CODE=$?
+GATE_ACTIVE=false
+BLOCKED=false
 
-if [[ $EXIT_CODE -ne 0 ]]; then
+# ── Lint gate (optional) ─────────────────────────────────────────────────────
+if [[ -n "$LINT_CMD" ]] && ! echo "$LINT_CMD" | grep -q "e\.g\."; then
+  GATE_ACTIVE=true
   echo "" >&2
-  echo "DEPLOY BLOCKED: tests failed (exit $EXIT_CODE). Fix before deploying." >&2
-  exit 2  # exit 2 = blocking error: Claude sees stderr, tool call is prevented
+  echo "Lint: $LINT_CMD" >&2
+  cd "$CLAUDE_PROJECT_DIR" && eval "$LINT_CMD"
+  if [[ $? -ne 0 ]]; then
+    echo "" >&2
+    echo "DEPLOY BLOCKED: lint failed. Fix lint errors before deploying." >&2
+    BLOCKED=true
+  fi
 fi
 
-echo "Tests passed — proceeding with deploy." >&2
+# ── Test gate (required for the guard to activate) ───────────────────────────
+if [[ -z "$TEST_CMD" ]] || echo "$TEST_CMD" | grep -q "e\.g\."; then
+  if [[ "$GATE_ACTIVE" == "false" ]]; then
+    echo "" >&2
+    echo "pre-deploy-guard: no Lint or Test command in CLAUDE.md — skipping gate." >&2
+    echo "Set '**Test:**' in CLAUDE.md to enable pre-deploy protection." >&2
+    exit 0
+  fi
+else
+  GATE_ACTIVE=true
+  if [[ "$BLOCKED" == "false" ]]; then
+    echo "" >&2
+    echo "Tests: $TEST_CMD" >&2
+    cd "$CLAUDE_PROJECT_DIR" && eval "$TEST_CMD"
+    if [[ $? -ne 0 ]]; then
+      echo "" >&2
+      echo "DEPLOY BLOCKED: tests failed. Fix before deploying." >&2
+      BLOCKED=true
+    fi
+  fi
+fi
+
+[[ "$BLOCKED" == "true" ]] && exit 2
+
+echo "" >&2
+echo "Gate passed — proceeding with deploy." >&2
 exit 0

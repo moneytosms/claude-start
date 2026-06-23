@@ -8,7 +8,8 @@
 - **Framework:** <!-- Next.js 14, FastAPI, etc. -->
 - **Key deps:** <!-- Prisma, Redis, etc. -->
 - **Test:** <!-- pnpm test, pytest, etc. -->
-- **Format:** <!-- prettier --write, ruff format . (mirrors PROJECT_FMT in settings.json env) -->
+- **Lint:** <!-- npm run lint, ruff check ., etc. -->
+- **Format:** <!-- prettier --write, ruff format . (set as PROJECT_FMT in settings.local.json) -->
 - **Build:** <!-- pnpm build, cargo build --release -->
 - **Deploy:** <!-- fly deploy, vercel --prod -->
 

@@ -28,6 +28,19 @@
         ]
       }
     ],
+    "Notification": [
+      {
+        "matcher": "idle_prompt|permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash",
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/notify.sh"],
+            "async": true
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -40,7 +53,8 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/pre-deploy-guard.sh"]
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/pre-deploy-guard.sh"],
+            "timeout": 300
           }
         ]
       }
@@ -52,7 +66,8 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/auto-format.sh"]
+            "args": ["${CLAUDE_PROJECT_DIR}/.claude/hooks/auto-format.sh"],
+            "async": true
           }
         ]
       }
@@ -68,8 +83,5 @@
         ]
       }
     ]
-  },
-  "env": {
-    "PROJECT_FMT": ""
   }
 }

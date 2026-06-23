@@ -1,6 +1,6 @@
 {
   "env": {
-    "PROJECT_FMT": "<your formatter command>",
-    "LOCAL_PORT": "3000"
+    "PROJECT_FMT": "",
+    "NODE_ENV": "development"
   }
 }

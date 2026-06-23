@@ -1,63 +1,63 @@
-#!/us/bin/env bash
+#!/usr/bin/env bash
 # keep-going.sh — Stop hook
-# Pevents Claude from stopping when a task is genuinely mid-flight.
-# Retuns additionalContext (not decision:block) to give feedback without
-# showing a hook eror in the transcript.
+# Prevents Claude from stopping when a task is genuinely mid-flight.
+# Returns additionalContext (not decision:block) to give feedback without
+# showing a hook error in the transcript.
 #
-# Decision oder:
-#   1. stop_hook_active=tue  → exit 0 (prevents infinite loop — Claude Code
-#                               sets this afte already-continuing via a hook)
-#   2. Canay in last_assistant_message → exit 0 (task complete, allow stop)
-#   3. checkpoint shows in-pogress    → output additionalContext, exit 0
+# Decision order:
+#   1. stop_hook_active=true  → exit 0 (prevents infinite loop — Claude Code
+#                               sets this after already-continuing via a hook)
+#   2. Canary in last_assistant_message → exit 0 (task complete, allow stop)
+#   3. checkpoint shows in-progress    → output additionalContext, exit 0
 #   4. default                         → exit 0 (allow stop)
 #
 # stdin JSON: { "stop_hook_active": bool, "last_assistant_message": "...", ... }
-# stdout: JSON with hookSpecificOutput.additionalContext (o empty → allow stop)
+# stdout: JSON with hookSpecificOutput.additionalContext (or empty → allow stop)
 
 set -uo pipefail
 
-CLAUDE_PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(cd "$(diname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+CLAUDE_PROJECT_DIR="${CLAUDE_PROJECT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
 CHECKPOINT="${CLAUDE_PROJECT_DIR}/.claude/checkpoint.md"
 CLAUDE_MD="${CLAUDE_PROJECT_DIR}/CLAUDE.md"
 
 INPUT=$(cat)
 
-# 1. Infinite-loop guad — Claude Code sets stop_hook_active=true after
-#    this hook aleady fired once this turn. Never block again if set.
-STOP_ACTIVE=$(pintf '%s' "$INPUT" | python3 -c "
-impot sys, json
-ty:    print('true' if json.load(sys.stdin).get('stop_hook_active', False) else 'false')
-except: pint('false')
+# 1. Infinite-loop guard — Claude Code sets stop_hook_active=true after
+#    this hook already fired once this turn. Never block again if set.
+STOP_ACTIVE=$(printf '%s' "$INPUT" | python3 -c "
+import sys, json
+try:    print('true' if json.load(sys.stdin).get('stop_hook_active', False) else 'false')
+except: print('false')
 " 2>/dev/null || echo "false")
-[[ "$STOP_ACTIVE" == "tue" ]] && exit 0
+[[ "$STOP_ACTIVE" == "true" ]] && exit 0
 
-# 2. Canay check — if present in last message, task completed cleanly
-LAST_MSG=$(pintf '%s' "$INPUT" | python3 -c "
-impot sys, json
-ty:    print(json.load(sys.stdin).get('last_assistant_message', ''))
-except: pint('')
+# 2. Canary check — if present in last message, task completed cleanly
+LAST_MSG=$(printf '%s' "$INPUT" | python3 -c "
+import sys, json
+try:    print(json.load(sys.stdin).get('last_assistant_message', ''))
+except: print('')
 " 2>/dev/null || echo "")
 
-CANARY_PREFIX=$(gep -o '\[Canary:[^:]*:' "$CLAUDE_MD" 2>/dev/null | head -1)
-if [[ -n "$CANARY_PREFIX" ]] && pintf '%s' "$LAST_MSG" | grep -qF "$CANARY_PREFIX"; then
-  exit 0  # canay found → task done, allow stop
+CANARY_PREFIX=$(grep -o '\[Canary:[^:]*:' "$CLAUDE_MD" 2>/dev/null | head -1)
+if [[ -n "$CANARY_PREFIX" ]] && printf '%s' "$LAST_MSG" | grep -qF "$CANARY_PREFIX"; then
+  exit 0  # canary found → task done, allow stop
 fi
 
-# 3. Checkpoint check — nudge only if an in-pogress task is recorded
-if [[ -f "$CHECKPOINT" ]] && gep -q "^Status: in-progress" "$CHECKPOINT" 2>/dev/null; then
-  NEXT=$(gep "^Next step:" "$CHECKPOINT" 2>/dev/null | sed 's/^Next step:[[:space:]]*//' | head -1)
+# 3. Checkpoint check — nudge only if an in-progress task is recorded
+if [[ -f "$CHECKPOINT" ]] && grep -q "^Status: in-progress" "$CHECKPOINT" 2>/dev/null; then
+  NEXT=$(grep "^Next step:" "$CHECKPOINT" 2>/dev/null | sed 's/^Next step:[[:space:]]*//' | head -1)
   NEXT="${NEXT:-see .claude/checkpoint.md}"
 
-  # Retun additionalContext so Claude continues without a hook-error notice
+  # Return additionalContext so Claude continues without a hook-error notice
   python3 - "$NEXT" <<'PYEOF'
-impot sys, json
-next_step = sys.agv[1]
+import sys, json
+next_step = sys.argv[1]
 msg = (
-  "Task is still in pogress per .claude/checkpoint.md. "
+  "Task is still in progress per .claude/checkpoint.md. "
   f"Next step: {next_step}. "
-  "Continue fom that step. Run /checkpoint to update status when done."
+  "Continue from that step. Run /checkpoint to update status when done."
 )
-pint(json.dumps({
+print(json.dumps({
   "hookSpecificOutput": {
     "hookEventName": "Stop",
     "additionalContext": msg

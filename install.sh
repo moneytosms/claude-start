@@ -29,7 +29,9 @@ else
   cargo install --git https://github.com/rtk-ai/rtk \
     || warn "RTK install failed. Install manually: cargo install --git https://github.com/rtk-ai/rtk"
 fi
-rtk init -g 2>/dev/null || warn "rtk init -g failed — run manually. Verify with: rtk gain"
+if command -v rtk >/dev/null 2>&1; then
+  rtk init -g 2>/dev/null || warn "rtk init -g failed — run: rtk init -g"
+fi
 
 # ── 3. addyosmani/agent-skills ────────────────────────────────────────────────
 info "Installing addyosmani/agent-skills..."

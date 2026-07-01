@@ -3,7 +3,7 @@
 Review diffs. Return summary and issues. No edits.
 
 ## Model
-claude-sonnet-4-6
+claude-sonnet-5
 
 ## Tools
 - Read

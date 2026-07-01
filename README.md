@@ -82,6 +82,37 @@ cd my-project
 
 The script installs all tooling, wipes the template git history, inits a fresh repo, then opens Claude to ask you five questions: project name, description, runtime, formatter, and canary codename. That's the only interactive step.
 
+## Adopting into an existing project
+
+Already have a repo with its own `.git` and `CLAUDE.md`? Don't use `install.sh` — it wipes git history. Use `install-existing` instead: it never touches `.git`, backs up your existing `.claude/` before replacing it, and asks Claude to reconcile anything from the backup plus merge `CLAUDE.md` knowledge into yours (your file stays the base).
+
+**macOS / Linux / WSL:**
+
+```bash
+git clone https://github.com/moneytosms/claude-start /tmp/claude-start
+cd /tmp/claude-start
+chmod +x install-existing.sh
+./install-existing.sh /path/to/your/existing/project
+```
+
+**Windows (PowerShell):**
+
+```powershell
+git clone https://github.com/moneytosms/claude-start C:\temp\claude-start
+cd C:\temp\claude-start
+.\install-existing.ps1 -Target C:\path\to\your\existing\project
+```
+
+What it does:
+1. If you have an existing `.claude/`, backs it up to `.claude.backup-<timestamp>/`, then writes the template's `.claude/` (hooks, agents, commands, rules) in its place
+2. Same for `.mcp.json` — backed up to `.mcp.json.backup` if present, then overwritten
+3. Creates `.claude/settings.local.json` from the example if missing
+4. `chmod +x` on hooks (Linux/WSL/macOS directly; on Windows, run that step yourself in WSL/Git Bash afterward)
+5. If you have no `CLAUDE.md`, copies the template's in as a starting point
+6. Opens Claude in your project with one prompt that does two things: merges useful template `CLAUDE.md` sections into yours (your file is the base, nothing overwritten or restructured), and reconciles the `.claude.backup-*/` — ports back anything project-specific (custom hooks/agents/commands/rules) you had before, then deletes the backup and the reference copy
+
+Nothing is committed for you — review the diff (`git status`, `git diff`) and commit when happy.
+
 ## After install
 
 1. **Fill in the rest of `CLAUDE.md`** as the project takes shape — Test, Lint, Build, Deploy commands

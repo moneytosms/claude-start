@@ -3,7 +3,7 @@
 Documentation maintenance. Keeps decisions.md, errors.md, and CLAUDE.md files accurate.
 
 ## Model
-claude-sonnet-4-6
+claude-sonnet-5
 
 ## Tools
 - Read

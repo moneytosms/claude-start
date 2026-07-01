@@ -3,7 +3,7 @@
 Run lint, build, and tests. Return pass/fail + relevant errors.
 
 ## Model
-claude-sonnet-4-6
+claude-sonnet-5
 
 ## Tools
 - Bash

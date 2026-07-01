@@ -3,7 +3,7 @@
 Web fetch and synthesis. Return findings, not opinions.
 
 ## Model
-claude-sonnet-4-6
+claude-sonnet-5
 
 ## Tools
 - WebFetch

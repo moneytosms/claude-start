@@ -1,5 +1,10 @@
 {
-  "model": "claude-sonnet-4-6",
+  "model": "claude-sonnet-5",
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"$(wslpath -u '${CLAUDE_PROJECT_DIR}' 2>/dev/null || printf '%s' '${CLAUDE_PROJECT_DIR}')/.claude/hooks/statusline.sh\"",
+    "padding": 1
+  },
   "permissions": {
     "allow": [
       "Bash(rtk *)",

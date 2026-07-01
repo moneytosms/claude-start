@@ -86,7 +86,6 @@ No RTK wrapper exists → use the tool directly, don't force it.
 
 - Branches: semantic, lowercase, hyphenated — `feat/auth-refresh`, `fix/login-crash`, `chore/update-deps`
 - Commits: conventional commits (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`), imperative, ≤72 char subject, no period
-- IMPORTANT: never add "Co-authored-by: Claude" or any AI attribution to commits
 - `gh` CLI for all GitHub ops
 
 ## Output

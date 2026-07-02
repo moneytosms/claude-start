@@ -129,7 +129,12 @@ Task 1 -- merge CLAUDE.md:
 - When done, delete ./.claude/.template-claude-md-reference.md.
 $backupNote
 
-Task 2 -- print a short summary of everything added, merged, or ported, and everything deleted.
+Task 2 -- set up RTK wrappers for this project's actual stack:
+- Detect the stack from repo files (package.json -> npm/pnpm, requirements.txt/pyproject.toml -> pip/ruff/pytest/mypy, Cargo.toml -> cargo, go.mod -> go/golangci-lint, Gemfile -> rake/rubocop/rspec, pom.xml/build.gradle -> mvn/gradlew, *.csproj -> dotnet, next.config.* -> next, schema.prisma -> prisma, playwright.config.* -> playwright, jest.config.*/vitest.config.* -> jest/vitest).
+- Run 'rtk help' to confirm exact subcommand names before writing them.
+- Fill the 'RTK wrappers' line under ## Stack in MY CLAUDE.md with the real commands for what's actually present, replacing the placeholder -- not the generic example list.
+
+Task 3 -- print a short summary of everything added, merged, or ported, and everything deleted.
 "@
 
 Push-Location $Target

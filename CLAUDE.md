@@ -12,6 +12,7 @@
 - **Format:** <!-- prettier --write, ruff format . (set as PROJECT_FMT in settings.local.json) -->
 - **Build:** <!-- pnpm build, cargo build --release -->
 - **Deploy:** <!-- fly deploy, vercel --prod -->
+- **RTK wrappers:** <!-- fill per stack above, e.g. Node: rtk npm/pnpm/npx/tsc/lint/jest/vitest/playwright/prettier/prisma/next | Python: rtk pip/ruff/pytest/mypy | Rust: rtk cargo | Go: rtk go/golangci-lint | Ruby: rtk rake/rubocop/rspec | Java/Android: rtk mvn/gradlew | .NET: rtk dotnet -->
 
 ## Canary
 
@@ -20,7 +21,7 @@ Can't produce it = context dropped. Stop and say so.
 
 ## Tooling
 
-- **RTK** — Bash output auto-compressed. Use `rtk <cmd>` on high-output commands.
+- **RTK** — Bash output auto-compressed. First layer for ALL matching commands, raw only if no wrapper exists. See **RTK wrappers** in Stack above for this project's exact commands. Full list: `rtk help`.
 - **ctx7** — `npx ctx7 library <name> <query>` before touching any external API. Never rely on training data for library APIs.
 - **Caveman** — `/caveman` for long sessions. `/caveman off` to disable.
 - **Handoff** — use `/handoff` before ending a session, not `/compact`.

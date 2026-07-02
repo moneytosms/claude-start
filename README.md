@@ -109,7 +109,7 @@ What it does:
 3. Creates `.claude/settings.local.json` from the example if missing
 4. `chmod +x` on hooks (Linux/WSL/macOS directly; on Windows, run that step yourself in WSL/Git Bash afterward)
 5. If you have no `CLAUDE.md`, copies the template's in as a starting point
-6. Opens Claude in your project with one prompt that does two things: merges useful template `CLAUDE.md` sections into yours (your file is the base, nothing overwritten or restructured), and reconciles the `.claude.backup-*/` — ports back anything project-specific (custom hooks/agents/commands/rules) you had before, then deletes the backup and the reference copy
+6. Opens Claude in your project with one prompt that does three things: merges useful template `CLAUDE.md` sections into yours (your file is the base, nothing overwritten or restructured); detects your stack (package.json, pyproject.toml, Cargo.toml, go.mod, Gemfile, pom.xml/build.gradle, *.csproj, etc.) and fills the `RTK wrappers` line under `## Stack` with the real `rtk` subcommands for what's actually present; and reconciles the `.claude.backup-*/` — ports back anything project-specific (custom hooks/agents/commands/rules) you had before, then deletes the backup and the reference copy
 
 Nothing is committed for you — review the diff (`git status`, `git diff`) and commit when happy.
 

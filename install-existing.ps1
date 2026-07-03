@@ -142,4 +142,7 @@ claude $prompt
 Pop-Location
 
 Write-Info ""
+Write-Info "Statusline configured (.claude/settings.json + .claude/hooks/statusline.sh)."
+Write-Info "Restart/open a new Claude Code session in $Target to see it -- settings load once at startup."
+Write-Info ""
 Write-Info "Done. .git was not touched. Review the diff, then commit when ready."

@@ -110,4 +110,7 @@ Task 3 — print a short summary of everything added, merged, or ported, and eve
   )
 
 info ""
+info "Statusline configured (.claude/settings.json + .claude/hooks/statusline.sh)."
+info "Restart/open a new Claude Code session in $TARGET to see it — settings load once at startup."
+info ""
 info "Done. .git was not touched. Review the diff, then commit when ready."

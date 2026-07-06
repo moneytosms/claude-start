@@ -155,6 +155,7 @@ These are transparent by default — you don't invoke them, they just happen:
 | `notify` | Claude goes idle or needs permission | Desktop notification so you don't watch the terminal |
 | `log-bash` | Every bash command | Appends to `.claude/bash.log` — passive audit trail |
 | `pre-deploy-guard` | Any deploy command | Runs lint + tests first; blocks if they fail |
+| `privacy-guard` | Any `Read` or `Bash` referencing secret files | Blocks `.env*`, `*.pem`, `*.key`, SSH keys, `credentials.json` |
 | `auto-format` | Every file write | Runs `PROJECT_FMT` on the file in the background |
 | `keep-going` | Claude tries to stop | Checks for canary; nudges to continue if task is mid-flight |
 

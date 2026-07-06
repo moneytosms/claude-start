@@ -9,7 +9,7 @@ Opinionated Claude Code starter. Clone, run the install script, answer five ques
 | **Memory**      | `CLAUDE.md` with canary, error protocol, context rules — committed, teammates see the same thing                                                            |
 | **Token tools** | RTK (89% avg CLI output compression) · Caveman (70% response compression) · ctx7 (live library docs)                                                        |
 | **Skills**      | addyosmani/agent-skills (24 lifecycle skills) · mattpocock/skills (grill-me, handoff, tdd, git-guardrails, write-a-skill) · Ponytail (anti-overengineering) |
-| **Hooks**       | session-start · notify · log-bash · pre-deploy-guard (lint + test gate) · auto-format · keep-going                                                          |
+| **Hooks**       | session-start · notify · log-bash · pre-deploy-guard (lint + test gate) · privacy-guard (blocks reads of .env/ssh keys/secrets) · auto-format · keep-going  |
 | **Commands**    | `/commit` `/pr` `/ship` `/plan` `/checkpoint` `/batch` `/review` `/verify`                                                                                  |
 | **Agents**      | ReadOnly · BuildValidator · LogAnalyzer · Researcher · CodeReviewer · DocWriter                                                                             |
 | **Logs**        | Decision log · error log · bash audit trail · checkpoint system                                                                                             |

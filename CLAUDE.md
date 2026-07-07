@@ -40,6 +40,10 @@ Can't produce it = context dropped. Stop and say so.
   2. If pattern → create `.claude/skills/<name>.md`
   3. If approach changes → append to **Learned rules** below
 
+## Agent output conventions
+
+Anything we build that talks back to Claude (hooks, agent defs, skills, subagent reports) follows `.claude/rules/agent-output-conventions.md`: no silent truncation, explicit empty states, end with a concrete next command.
+
 ## Agents
 
 Ask before spawning and spawn using appropriate model according to the task. Defined in `.claude/agents/`.

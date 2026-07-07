@@ -159,6 +159,7 @@ These are transparent by default — you don't invoke them, they just happen:
 | `log-bash` | Every bash command | Appends to `.claude/bash.log` — passive audit trail |
 | `pre-deploy-guard` | Any deploy command | Runs lint + tests first; blocks if they fail |
 | `privacy-guard` | Any `Read` or `Bash` referencing secret files | Blocks `.env*`, `*.pem`, `*.key`, SSH keys, `credentials.json` |
+| `git-guard` | force-push, `reset --hard`, `git clean -f/-x`, `rm -rf` | Blocks with reason + safer next step (settings.json deny list also blocks these, this hook explains why) |
 | `auto-format` | Every file write | Runs `PROJECT_FMT` on the file in the background |
 | `keep-going` | Claude tries to stop | Checks for canary; nudges to continue if task is mid-flight |
 | `statusline.sh` | Every render | Shows model, dir, git branch(dirty), context %, 5h/7d rate-limit usage |

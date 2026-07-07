@@ -9,8 +9,10 @@ Opinionated Claude Code starter. Clone, run the install script, answer five ques
 | **Memory**      | `CLAUDE.md` with canary, error protocol, context rules — committed, teammates see the same thing                                                            |
 | **Token tools** | RTK (89% avg CLI output compression) · Caveman (70% response compression) · ctx7 (live library docs)                                                        |
 | **Skills**      | addyosmani/agent-skills (24 lifecycle skills) · mattpocock/skills (grill-me, handoff, tdd, git-guardrails, write-a-skill) · Ponytail (anti-overengineering) |
-| **Hooks**       | session-start · notify · log-bash · pre-deploy-guard (lint + test gate) · privacy-guard (blocks reads of .env/ssh keys/secrets) · auto-format · keep-going  |
+| **Hooks**       | session-start · notify · log-bash · pre-deploy-guard (lint + test gate) · privacy-guard (blocks reads of .env/ssh keys/secrets) · auto-format · keep-going · statusline (model/dir/branch/context%/rate-limit%) |
+| **Rules**       | `.claude/rules/` — glob-scoped domain rules, plus `agent-output-conventions.md` (always-on: no silent truncation, explicit empty states, next-step suggestions on all agent-facing output) |
 | **Commands**    | `/commit` `/pr` `/ship` `/plan` `/checkpoint` `/batch` `/review` `/verify`                                                                                  |
+| **Workflows**   | `.claude/workflows/` — dynamic multi-step JS scripts Claude writes, become `/<name>` commands (empty until you need one)                                    |
 | **Agents**      | ReadOnly · BuildValidator · LogAnalyzer · Researcher · CodeReviewer · DocWriter                                                                             |
 | **Logs**        | Decision log · error log · bash audit trail · checkpoint system                                                                                             |
 

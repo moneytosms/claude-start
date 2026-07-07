@@ -54,6 +54,10 @@ Every plan: **Goal** / **Constraints** / **Acceptance Criteria** / **Unresolved 
 - Give subagents only the context they need, never a full project dump.
 - Fork for breadth (scan/discover/summarize). Stay inline for depth (reasoning-heavy work you need to steer).
 
+## Agent output conventions
+
+Anything built here that talks back to Claude (hooks, agent defs, skills, subagent reports) follows `.claude/rules/agent-output-conventions.md`: no silent truncation, explicit empty states, end with a concrete next command.
+
 ## Tools — prefer these over defaults
 
 | Instead of | Use | Why |

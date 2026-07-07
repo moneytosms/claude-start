@@ -1,6 +1,6 @@
 # Onboarding — Claude Code setup for contributors
 
-This project uses [claude-template](https://github.com/your-org/claude-template) to give Claude Code shared memory, hooks, agents, and commands that work the same for every contributor.
+This project uses [claude-start](https://github.com/moneytosms/claude-start) to give Claude Code shared memory, hooks, agents, and commands that work the same for every contributor.
 
 This doc takes about 10 minutes. Do it once when you first clone the repo.
 
@@ -79,8 +79,11 @@ On Windows, hooks run via WSL. The hook commands in `settings.json` use `wslpath
 ├── CLAUDE.md              ← Project memory. Claude reads this every session.
 ├── agents/                ← Subagent definitions (ReadOnly, BuildValidator, etc.)
 ├── commands/              ← Slash commands (/plan, /ship, /review, etc.)
-├── hooks/                 ← Scripts that run automatically on Claude events
-├── rules/                 ← Domain rules auto-loaded into Claude's context
+├── hooks/                 ← Scripts that run automatically on Claude events (incl. statusline.sh)
+├── rules/                 ← Domain rules auto-loaded into Claude's context (glob-scoped) + agent-output-conventions.md (always-on house style)
+├── skills/                ← Project-specific skills Claude writes as patterns emerge (starts empty)
+├── workflows/             ← Dynamic multi-step scripts, become /<name> commands (starts empty — see workflows/README.md)
+├── plans/                 ← Plan-mode output, one file per planned task
 ├── output-styles/         ← Response style presets (terse / explain)
 ├── errors.md              ← Major error log — Claude appends, you review
 ├── decisions.md           ← Architecture decision log — DocWriter maintains
@@ -158,6 +161,7 @@ These are transparent by default — you don't invoke them, they just happen:
 | `privacy-guard` | Any `Read` or `Bash` referencing secret files | Blocks `.env*`, `*.pem`, `*.key`, SSH keys, `credentials.json` |
 | `auto-format` | Every file write | Runs `PROJECT_FMT` on the file in the background |
 | `keep-going` | Claude tries to stop | Checks for canary; nudges to continue if task is mid-flight |
+| `statusline.sh` | Every render | Shows model, dir, git branch(dirty), context %, 5h/7d rate-limit usage |
 
 ---
 

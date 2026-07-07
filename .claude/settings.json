@@ -2,7 +2,7 @@
   "model": "claude-sonnet-5",
   "statusLine": {
     "type": "command",
-    "command": "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/statusline.sh\"",
+    "command": "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/statusline.sh\"",
     "padding": 1
   },
   "permissions": {
@@ -37,7 +37,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/session-start.sh\""]
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/session-start.sh\""]
           }
         ]
       }
@@ -49,7 +49,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/notify.sh\""],
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/notify.sh\""],
             "async": true
           }
         ]
@@ -62,12 +62,12 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/log-bash.sh\""]
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/log-bash.sh\""]
           },
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/pre-deploy-guard.sh\""],
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/pre-deploy-guard.sh\""],
             "timeout": 300000
           }
         ]
@@ -78,7 +78,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/privacy-guard.sh\""]
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/privacy-guard.sh\""]
           }
         ]
       }
@@ -90,7 +90,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/auto-format.sh\""],
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/auto-format.sh\""],
             "async": true
           }
         ]
@@ -102,7 +102,7 @@
           {
             "type": "command",
             "command": "bash",
-            "args": ["-c", "bash \"$(wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\")/.claude/hooks/keep-going.sh\""]
+            "args": ["-c", "bash \"$(case \"$CLAUDE_PROJECT_DIR\" in /mnt/*) printf '%s' \"$CLAUDE_PROJECT_DIR\";; *) wslpath -u \"$CLAUDE_PROJECT_DIR\" 2>/dev/null || printf '%s' \"$CLAUDE_PROJECT_DIR\";; esac)/.claude/hooks/keep-going.sh\""]
           }
         ]
       }

@@ -128,3 +128,7 @@ Nothing is committed for you — review the diff (`git status`, `git diff`) and 
 - **MCP servers** — add to `.mcp.json` (team-shared, committed) or `settings.local.json` (personal)
 - **CI/CD** — `/ship` handles local → remote; pipeline config is project-specific
 - **Issue tracker** — add mattpocock's triage skills if needed
+
+## License
+
+MIT — see [LICENSE](LICENSE).
